@@ -1,16 +1,21 @@
-const express =require('express');
-const path=require('path');
-const router=express.Router();
-const rootDir=require('../util/path');
+const path = require('path');
 
-router.get("/",(req,res,next)=>{
-    res.sendFile(path.join(rootDir,'views','shop.html'));
+const express = require('express');
 
-});
+const shopController = require('../controllers/shop');
 
-// router.use((req,res,next)=>{
-//     res.status(404).sendFile(path.join(rootDir,'views','404.html'));
-//     console.log(404);
-// });
+const router = express.Router();
+
+router.get('/', shopController.getIndex);
+
+router.get('/products', shopController.getProducts);
+
+router.get('/products/:productId', shopController.getProduct);       /// to go to the link products/anything!!!!
+
+router.get('/cart', shopController.getCart);
+
+router.get('/orders', shopController.getOrders);
+
+router.get('/checkout', shopController.getCheckout);
 
 module.exports = router;
